@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="3be15014-ac3d-465b-adbc-b86bcc2810be" doc:description="http configuration for the listener" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="1.project_zeroFlow" doc:id="408b487f-7b0f-4cc8-bf62-a24da3c7416b" >
+		<http:listener doc:name="Listener" doc:id="c0636de9-a32b-4b50-9298-11366a52ebf6" config-ref="HTTP_Listener_config" path="/project-zero">
+		</http:listener>
+		<logger level="INFO" doc:name="Logger" doc:id="5ad5e3dc-da54-4e87-a680-ee215dd37391" message='"START Log"'/>
+		<set-payload value='"hello world from set payload"' doc:name="Set Payload" doc:id="2245a8fe-f5a6-4f8b-bcca-37faa7cec513" />
+	</flow>
+</mule>
