@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<flow name="2a.assignment_1Flow" doc:id="407b4bd9-0408-47c5-b4f2-bfb397b68381" >
+		<http:listener doc:name="Listener" doc:id="148ef320-e20a-4016-a0d9-87dbe2662a4c" config-ref="HTTP_Listener_config" path="/exercise/{id}" allowedMethods="GET">
+			<http:response >
+				<http:body ><![CDATA[#[vars.queryResponse]]]></http:body>
+			</http:response>
+		</http:listener>
+		<logger level="INFO" doc:name="Log START" doc:id="b78426c5-b45b-485c-8214-4f1fd8c43cb2" message='#["log START - " ++ flow.name]' />
+		<set-payload value='#[%dw 2.0&#10;&#10;output application/json&#10;&#10;--- &#10;&#10;{ "uriParams" : attributes.uriParams.id,&#10;  "queryParams" : attributes.queryParams&#10;	&#10;}]' doc:name="Set Payload" doc:id="74fa3888-6b35-4218-9732-bf517ae42b0a" />
+		<set-variable value="#[payload]" doc:name="Set Response Output" doc:id="2d0c9809-407f-4814-89da-3b39d4377c66" variableName="queryResponse"/>
+	</flow>
+</mule>
